@@ -1,6 +1,8 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import StickyButtons from "@/components/StickyButtons";
+
 
 export default function RootLayout({ children }) {
   return (
@@ -9,6 +11,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <StickyButtons/>
       </body>
     </html>
   );
