@@ -60,13 +60,13 @@ export default function HomePage() {
             <input
               type="text"
               placeholder="Job title, keywords, or company"
-              className="flex-1 px-4 py-3 border rounded-lg outline-none"
+              className="flex-1 px-4 py-3  rounded-lg outline-none"
             />
 
             <input
               type="text"
               placeholder="City or postcode"
-              className="flex-1 px-4 py-3 border rounded-lg outline-none"
+              className="flex-1 px-4 py-3 rounded-lg outline-none"
             />
 
             <Link

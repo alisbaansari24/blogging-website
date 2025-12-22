@@ -184,7 +184,7 @@ export default function AboutSection() {
           </ul>
 
           <Link
-            href="/jobs"
+            href="/register"
             className="inline-block mt-8 px-8 py-3 bg-[#1967d2] text-white rounded-lg font-medium hover:bg-blue-700 transition"
           >
             Get Started

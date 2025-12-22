@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import LoginModal from "@/components/LoginModal";
 import {
   ChevronDown,
   Menu,
@@ -17,6 +18,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+const [openLogin, setOpenLogin] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,72 +44,80 @@ export default function Navbar() {
         </Link>
 
         {/* DESKTOP MENU */}
-        <nav className="hidden lg:flex items-center gap-8 text-gray-800 font-medium">
-          {[
-            { label: "Home", items: [] },
-            { label: "Find Jobs", items: [] },
-            {
-              label: "Employers",
-              items: [
-                "Employers List",
-                "Employers Single",
-                "Employers Dashboard",
-              ],
-            },
-            {
-              label: "Candidates",
-              items: [
-                "Candidates List",
-                "Candidates Single",
-                "Candidates Dashboard",
-              ],
-            },
-            {
-              label: "Blog",
-              items: ["Blogs", "Blog Details"],
-            },
-            {
-              label: "Pages",
-              items: [
-                "Shop",
-                "About",
-                "Pricing",
-                "FAQ's",
-                "Terms",
-                "Invoice",
-                "Contact",
-                "404",
-              ],
-            },
-          ].map((menu, i) => (
-            <div
-              key={i}
-              className="relative"
-              onMouseEnter={() => setActiveDropdown(menu.label)}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="flex items-center gap-1 hover:text-[#1967d2]">
-                {menu.label}
-                {menu.items.length > 0 && <ChevronDown size={16} />}
-              </button>
+<nav className="hidden lg:flex items-center gap-8 text-gray-800 font-medium">
+  {[
+    { label: "Home", href: "/", items: [] },
+    { label: "Find Jobs", href: "/jobs", items: [] },
+    {
+      label: "Employers",
+      items: [
+        { label: "Employers List", href: "/employers" },
+        { label: "Employers Single", href: "/employers/details" },
+        { label: "Employers Dashboard", href: "/employers/dashboard" },
+      ],
+    },
+    {
+      label: "Candidates",
+      items: [
+        { label: "Candidates List", href: "/candidates" },
+        { label: "Candidates Single", href: "/candidates/details" },
+        { label: "Candidates Dashboard", href: "/candidates/dashboard" },
+      ],
+    },
+    {
+      label: "Blog",
+      items: [
+        { label: "Blogs", href: "/blog" },
+        { label: "Blog Details", href: "/blog/details" },
+      ],
+    },
+    {
+      label: "Pages",
+      items: [
+        { label: "Shop", href: "/shop" },
+        { label: "About", href: "/about" },
+        { label: "Pricing", href: "/pricing" },
+        { label: "FAQ's", href: "/faq" },
+        { label: "Terms", href: "/terms" },
+        { label: "Invoice", href: "/invoice" },
+        { label: "Contact", href: "/contact" },
+        { label: "404", href: "/not-found" },
+      ],
+    },
+  ].map((menu, i) => (
+    <div key={i} className="relative group">
+      {/* MAIN LINK */}
+      {menu.items.length === 0 ? (
+        <Link
+          href={menu.href}
+          className="hover:text-[#1967d2] transition"
+        >
+          {menu.label}
+        </Link>
+      ) : (
+        <>
+          <span className="cursor-pointer hover:text-[#1967d2] transition">
+            {menu.label}
+          </span>
 
-              {menu.items.length > 0 &&
-                activeDropdown === menu.label && (
-                  <div className="absolute top-full left-0 mt-3 bg-white shadow-lg rounded-lg w-56 py-2 text-sm">
-                    {menu.items.map((item, idx) => (
-                      <Link
-                        key={idx}
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100"
-                      >
-                        {item}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-            </div>
-          ))}
-        </nav>
+          {/* DROPDOWN */}
+          <div className="absolute left-0 top-full mt-3 w-56 bg-white shadow-xl rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            {menu.items.map((item, idx) => (
+              <Link
+                key={idx}
+                href={item.href}
+                className="block px-5 py-3 text-sm text-gray-700 hover:bg-[#f0f5f7] hover:text-[#1967d2]"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  ))}
+</nav>
+
 
         {/* DESKTOP ACTIONS */}
         <div className="hidden lg:flex items-center gap-3">
@@ -117,12 +127,17 @@ export default function Navbar() {
           >
             Upload your CV
           </Link>
-          <Link
-            href="/login"
-            className="px-4 py-2 text-sm bg-[#e7effa] text-[#1967d2] rounded-lg"
-          >
-            Login / Register
-          </Link>
+          <button
+  onClick={() => setOpenLogin(true)}
+  className="px-4 py-2 text-sm text-[#1967d2] border border-[#1967d2] rounded-lg hover:bg-[#1967d2] hover:text-white"
+>
+  Login / Register
+</button>
+
+<LoginModal
+  isOpen={openLogin}
+  onClose={() => setOpenLogin(false)}
+/>
           <Link
             href="/job-post"
             className="px-4 py-2 text-sm bg-[#1967d2] text-white rounded-lg"
