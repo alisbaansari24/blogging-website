@@ -7,7 +7,7 @@ import StickyButtons from "@/components/StickyButtons";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-[#f9fafb] text-gray-700">
+      <body className=" text-gray-700">
         <Navbar />
         <main>{children}</main>
         <Footer />

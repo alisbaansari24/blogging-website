@@ -113,7 +113,7 @@ export default function FeaturedJobsPage() {
           {jobs.map((job, index) => (
             <Link
               ref={(el) => (cardsRef.current[index] = el)}
-              href="/jobs/details"
+              href="/jobs"
               key={index}
               className="group bg-white border rounded-xl p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
             >

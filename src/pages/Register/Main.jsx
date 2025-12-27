@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
+import LoginModal from "@/components/LoginModal";
 export default function RegisterPage() {
   const [role, setRole] = useState("candidate");
   const [form, setForm] = useState({
@@ -171,27 +171,13 @@ export default function RegisterPage() {
 
               <p className="mt-4 text-sm text-gray-600">
                 Already have an account?{" "}
-                <Link href="/login" className="text-[#1967d2] font-medium">
+                <Link href="/LoginModal" className="text-[#1967d2] font-medium">
                   Log In
                 </Link>
               </p>
 
-              {/* OR */}
-              <div className="my-6 flex items-center gap-3">
-                <div className="flex-1 h-px bg-gray-200" />
-                <span className="text-sm text-gray-500">or</span>
-                <div className="flex-1 h-px bg-gray-200" />
-              </div>
-
-              {/* SOCIAL */}
-              <div className="space-y-3">
-                <button className="w-full py-3 border rounded-lg hover:bg-gray-50 transition">
-                  Log In via Facebook
-                </button>
-                <button className="w-full py-3 border rounded-lg hover:bg-gray-50 transition">
-                  Log In via Gmail
-                </button>
-              </div>
+             
+              
             </div>
           </div>
 

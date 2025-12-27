@@ -2,81 +2,98 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function AppDownloadPage() {
-  useEffect(() => {
-  // APP SECTION
-  gsap.from(".app-image", {
-    x: -80,
-    autoAlpha: 0,
-    duration: 1.2,
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: ".app-section",
-      start: "top 75%",
-    },
-  });
+  useLayoutEffect(() => {
+    // 🔥 RESET VISIBILITY (CRITICAL FIX)
+    gsap.set(
+      [
+        ".app-image",
+        ".app-text > *",
+        ".recruit-text > *",
+        ".recruit-image",
+      ],
+      { autoAlpha: 1 }
+    );
 
-  gsap.from(".app-text p, .app-text h2, .app-text div", {
-    y: 40,
-    autoAlpha: 0,
-    duration: 0.9,
-    stagger: 0.2,
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: ".app-section",
-      start: "top 75%",
-    },
-  });
+    const ctx = gsap.context(() => {
+      /* ================= APP SECTION ================= */
+      const appTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".app-section",
+          start: "top 75%",
+          toggleActions: "play none none reset",
+        },
+      });
 
-  // ✅ RECRUITING SECTION (FIXED)
-  gsap.from(
-    [
-      ".recruit-text h2",
-      ".recruit-text p",
-      ".recruit-text button",
-    ],
-    {
-      y: 40,
-      autoAlpha: 0,
-      duration: 0.9,
-      stagger: 0.25,
-      ease: "power3.out",
-      clearProps: "all", // 🔥 IMPORTANT
-      scrollTrigger: {
-        trigger: ".recruit-section",
-        start: "top 75%",
-      },
-    }
-  );
+      appTl
+        .from(".app-image", {
+          x: -80,
+          autoAlpha: 0,
+          duration: 1.1,
+          ease: "power3.out",
+        })
+        .from(
+          ".app-text > *",
+          {
+            y: 40,
+            autoAlpha: 0,
+            stagger: 0.2,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.6"
+        );
 
-  gsap.from(".recruit-image", {
-    x: 80,
-    autoAlpha: 0,
-    duration: 1.1,
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: ".recruit-section",
-      start: "top 75%",
-    },
-  });
-}, []);
+      /* ================= RECRUIT SECTION ================= */
+      const recruitTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".recruit-section",
+          start: "top 75%",
+          toggleActions: "play none none reset",
+        },
+      });
+
+      recruitTl
+        .from(".recruit-text > *", {
+          y: 40,
+          autoAlpha: 0,
+          stagger: 0.25,
+          duration: 0.8,
+          ease: "power3.out",
+        })
+        .from(
+          ".recruit-image",
+          {
+            x: 80,
+            autoAlpha: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "-=0.6"
+        );
+    });
+
+    ScrollTrigger.refresh();
+
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
+  }, []);
+
   return (
     <>
       {/* ================= APP DOWNLOAD ================= */}
       <section className="app-section bg-white py-24 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-          {/* LEFT IMAGE WITH OVAL BG */}
           <div className="app-image relative flex justify-center">
-            {/* OVAL BACKGROUND */}
             <div className="absolute w-[380px] h-[380px] md:w-[440px] md:h-[440px] bg-[#f0f5f7] rounded-full -z-10" />
-
             <Image
               src="/app.webp"
               alt="App Preview"
@@ -86,7 +103,6 @@ export default function AppDownloadPage() {
             />
           </div>
 
-          {/* RIGHT CONTENT */}
           <div className="app-text">
             <p className="text-[#1967d2] font-semibold tracking-wide">
               DOWNLOAD & ENJOY
@@ -97,12 +113,11 @@ export default function AppDownloadPage() {
             </h2>
 
             <p className="mt-4 text-gray-600 leading-relaxed">
-              Search through millions of jobs and find the right fit. Simply
+              Search through millions of jobs and find the right fit.
               <br />
               swipe right to apply.
             </p>
 
-            {/* STORE BUTTONS */}
             <div className="mt-8 flex flex-wrap gap-4">
               <Link href="https://apple.com" target="_blank">
                 <Image
@@ -131,8 +146,6 @@ export default function AppDownloadPage() {
       {/* ================= RECRUITING ================= */}
       <section className="recruit-section bg-[#f0f5f7] py-24 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-          {/* LEFT TEXT */}
           <div className="recruit-text">
             <h2 className="text-3xl md:text-4xl font-semibold text-gray-900">
               Recruiting?
@@ -144,19 +157,19 @@ export default function AppDownloadPage() {
               CVs in our database.
             </p>
 
-           <button
-  onClick={() =>
-    document.getElementById("hero")?.scrollIntoView({
-      behavior: "smooth",
-    })
-  }
-  className="mt-8 px-8 py-3 bg-[#1967d2] text-white rounded-lg font-medium hover:bg-blue-700 transition"
->
-  Start Recruiting Now
-</button>
+            {/* ✅ BUTTON NOW VISIBLE + ANIMATED */}
+            <button
+              onClick={() =>
+                document.getElementById("hero")?.scrollIntoView({
+                  behavior: "smooth",
+                })
+              }
+              className="mt-8 px-8 py-3 bg-[#1967d2] text-white rounded-lg font-medium hover:bg-blue-700 transition"
+            >
+              Start Recruiting Now
+            </button>
           </div>
 
-          {/* RIGHT IMAGE */}
           <div className="recruit-image flex justify-center lg:justify-end">
             <Image
               src="/recruiting.png"

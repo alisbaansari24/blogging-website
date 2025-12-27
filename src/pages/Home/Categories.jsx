@@ -20,55 +20,55 @@ const categories = [
     title: "Accounting / Finance",
     jobs: "2 open positions",
     icon: Briefcase,
-    link: "/jobs/accounting",
+    link: "/jobs",
   },
   {
     title: "Marketing",
     jobs: "86 open positions",
     icon: Megaphone,
-    link: "/jobs/marketing",
+    link: "/jobs",
   },
   {
     title: "Design",
     jobs: "43 open positions",
     icon: Palette,
-    link: "/jobs/design",
+    link: "/jobs",
   },
   {
     title: "Development",
     jobs: "12 open positions",
     icon: Code,
-    link: "/jobs/development",
+    link: "/jobs",
   },
   {
     title: "Human Resource",
     jobs: "55 open positions",
     icon: Users,
-    link: "/jobs/hr",
+    link: "/jobs",
   },
   {
     title: "Automotive Jobs",
     jobs: "2 open positions",
     icon: Car,
-    link: "/jobs/automotive",
+    link: "/jobs",
   },
   {
     title: "Customer Service",
     jobs: "2 open positions",
     icon: Headphones,
-    link: "/jobs/customer-service",
+    link: "/jobs",
   },
   {
     title: "Health and Care",
     jobs: "25 open positions",
     icon: HeartPulse,
-    link: "/jobs/health",
+    link: "/jobs",
   },
   {
     title: "Project Management",
     jobs: "92 open positions",
     icon: ClipboardList,
-    link: "/jobs/project-management",
+    link: "/jobs",
   },
 ];
 
@@ -133,8 +133,8 @@ export default function PopularCategoriesPage() {
                   className="group bg-white border rounded-xl p-6 flex items-start gap-4 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                 >
                   {/* ICON */}
-                  <div className="w-14 h-14 flex items-center justify-center rounded-lg bg-gray-100 group-hover:bg-blue-50 transition">
-                    <Icon className="w-7 h-7 text-gray-500 group-hover:text-[#1967d2] transition" />
+                  <div className="w-14 h-14 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-[#1967d2] transition">
+                    <Icon className="w-7 h-7 text-[#1967d2]  transition hover:text-white " />
                   </div>
 
                   {/* TEXT */}

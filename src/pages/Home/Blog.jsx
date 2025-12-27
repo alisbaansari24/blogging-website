@@ -71,7 +71,7 @@ export default function NewsPage() {
 
                 {/* TITLE */}
                 <h3 className="mt-4 text-lg font-semibold text-gray-900 hover:text-[#1967d2] transition">
-                  <Link href="/blog/details">
+                  <Link href="/details">
                     {item.title}
                   </Link>
                 </h3>
@@ -84,7 +84,7 @@ export default function NewsPage() {
 
                 {/* READ MORE */}
                 <Link
-                  href="/blog/details"
+                  href="/details"
                   className="inline-block mt-4 text-[#1967d2] font-medium hover:underline"
                 >
                   Read More

@@ -69,8 +69,8 @@ export default function Footer() {
           </h4>
           <ul className="space-y-3 text-sm text-gray-600">
             <li><Link href="/jobs" className="hover:text-[#1967d2]">Browse Jobs</Link></li>
-            <li><Link href="/categories" className="hover:text-[#1967d2]">Browse Categories</Link></li>
-            <li><Link href="/dashboard" className="hover:text-[#1967d2]">Candidate Dashboard</Link></li>
+            <li><Link href="/jobs" className="hover:text-[#1967d2]">Browse Categories</Link></li>
+            <li><Link href="/board" className="hover:text-[#1967d2]">Candidate Dashboard</Link></li>
             <li><Link href="/alerts" className="hover:text-[#1967d2]">Job Alerts</Link></li>
             <li><Link href="/bookmarks" className="hover:text-[#1967d2]">My Bookmarks</Link></li>
           </ul>
@@ -83,9 +83,9 @@ export default function Footer() {
           </h4>
           <ul className="space-y-3 text-sm text-gray-600">
             <li><Link href="/candidates" className="hover:text-[#1967d2]">Browse Candidates</Link></li>
-            <li><Link href="/employer-dashboard" className="hover:text-[#1967d2]">Employer Dashboard</Link></li>
-            <li><Link href="/add-job" className="hover:text-[#1967d2]">Add Job</Link></li>
-            <li><Link href="/packages" className="hover:text-[#1967d2]">Job Packages</Link></li>
+            <li><Link href="/dashboard" className="hover:text-[#1967d2]">Employer Dashboard</Link></li>
+            <li><Link href="/job-post" className="hover:text-[#1967d2]">Add Job</Link></li>
+            <li><Link href="/upload-cv" className="hover:text-[#1967d2]">Job Packages</Link></li>
           </ul>
         </div>
 
@@ -109,11 +109,11 @@ export default function Footer() {
             Helpful Resources
           </h4>
           <ul className="space-y-3 text-sm text-gray-600">
-            <li><Link href="/sitemap" className="hover:text-[#1967d2]">Site Map</Link></li>
+            <li><Link href="/#hero" className="hover:text-[#1967d2]">Site Map</Link></li>
             <li><Link href="/terms" className="hover:text-[#1967d2]">Terms of Use</Link></li>
-            <li><Link href="/privacy" className="hover:text-[#1967d2]">Privacy Center</Link></li>
-            <li><Link href="/security" className="hover:text-[#1967d2]">Security Center</Link></li>
-            <li><Link href="/accessibility" className="hover:text-[#1967d2]">Accessibility Center</Link></li>
+            <li><Link href="/#hero" className="hover:text-[#1967d2]">Privacy Center</Link></li>
+            <li><Link href="/#hero" className="hover:text-[#1967d2]">Security Center</Link></li>
+            <li><Link href="/#hero" className="hover:text-[#1967d2]">Accessibility Center</Link></li>
           </ul>
         </div>
       </div>

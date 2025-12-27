@@ -19,7 +19,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
 const [openLogin, setOpenLogin] = useState(false);
-
+const [mobileOpen, setMobileOpen] = useState(null);
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
@@ -52,39 +52,54 @@ const [openLogin, setOpenLogin] = useState(false);
       label: "Employers",
       items: [
         { label: "Employers List", href: "/employers" },
-        { label: "Employers Single", href: "/employers/details" },
-        { label: "Employers Dashboard", href: "/employers/dashboard" },
+        { label: "Employers Single", href: "/single" },
+        { label: "Employers Dashboard", href: "/dashboard" },
       ],
     },
     {
       label: "Candidates",
       items: [
         { label: "Candidates List", href: "/candidates" },
-        { label: "Candidates Single", href: "/candidates/details" },
-        { label: "Candidates Dashboard", href: "/candidates/dashboard" },
+        { label: "Candidates Single", href: "/list" },
+        { label: "Candidates Dashboard", href: "/board" },
       ],
     },
     {
       label: "Blog",
       items: [
         { label: "Blogs", href: "/blog" },
-        { label: "Blog Details", href: "/blog/details" },
+        { label: "Blog Details", href: "/details" },
       ],
     },
     {
-      label: "Pages",
-      items: [
-        { label: "Shop", href: "/shop" },
-        { label: "About", href: "/about" },
-        { label: "Pricing", href: "/pricing" },
-        { label: "FAQ's", href: "/faq" },
-        { label: "Terms", href: "/terms" },
-        { label: "Invoice", href: "/invoice" },
-        { label: "Contact", href: "/contact" },
-        { label: "404", href: "/not-found" },
+  
+  label: "Pages",
+  items: [
+    {
+      label: "Shop",
+      href: "/shop",
+      children: [
+        { label: "Shop List", href: "/shop" },
+        { label: "Shop Single", href: "/shop/single" },
+        { label: "Cart", href: "/cart" },
+        { label: "Checkout", href: "/checkout" },
+        { label: "Order Completed", href: "/order-completed" },
+        { label: "Login", href: "/login" },
+        { label: "Register", href: "/register" },
       ],
     },
-  ].map((menu, i) => (
+    { label: "About", href: "/about" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "FAQ's", href: "/faq" },
+    { label: "Terms", href: "/terms" },
+    { label: "Invoice", href: "/invoice" },
+    { label: "Contact", href: "/contact" },
+    { label: "404", href: "/not-found" },
+  ],
+}
+
+  ]
+  .map((menu, i) => (
     <div key={i} className="relative group">
       {/* MAIN LINK */}
       {menu.items.length === 0 ? (
@@ -158,20 +173,81 @@ const [openLogin, setOpenLogin] = useState(false);
 
       {/* MOBILE MENU */}
       {open && (
-        <div className="lg:hidden bg-white px-6 py-6 space-y-5 text-gray-800">
+        <div className="lg:hidden bg-white px-6 py-6 space-y-4">
           {[
-            "Home",
-            "Find Jobs",
-            "Employers",
-            "Candidates",
-            "Blog",
-            "Pages",
-          ].map((item, i) => (
-            <div key={i} className="font-medium">
-              {item}
+            { label: "Home", href: "/" },
+            { label: "Find Jobs", href: "/jobs" },
+            {
+              label: "Employers",
+              items: [
+                { label: "Employers List", href: "/employers" },
+                { label: "Employers Single", href: "/single" },
+                { label: "Employers Dashboard", href: "/dashboard" },
+              ],
+            },
+            {
+              label: "Candidates",
+              items: [
+                { label: "Candidates List", href: "/candidates" },
+                { label: "Candidates Single", href: "/list" },
+                { label: "Candidates Dashboard", href: "/board" },
+              ],
+            },
+            {
+              label: "Blog",
+              items: [
+                { label: "Blogs", href: "/blog" },
+                { label: "Blog Details", href: "/details" },
+              ],
+            },
+            {
+              label: "Pages",
+              items: [
+                { label: "About", href: "/about" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "FAQ's", href: "/faq" },
+    { label: "Terms", href: "/terms" },
+    { label: "Invoice", href: "/invoice" },
+    { label: "Contact", href: "/contact" },
+    { label: "404", href: "/not-found" },
+              ],
+            },
+          ].map((menu, i) => (
+            <div key={i}>
+              {!menu.items ? (
+                <Link href={menu.href} className="block font-medium">
+                  {menu.label}
+                </Link>
+              ) : (
+                <>
+                  <button
+                    onClick={() =>
+                      setMobileOpen(mobileOpen === i ? null : i)
+                    }
+                    className="w-full flex justify-between font-medium"
+                  >
+                    {menu.label}
+                    <ChevronDown
+                      className={`transition ${
+                        mobileOpen === i ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  {mobileOpen === i && (
+                    <div className="ml-4 mt-2 space-y-2">
+                      {menu.items.map((item, idx) => (
+                        <Link key={idx} href={item.href} className="block text-sm">
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </>
+              )}
             </div>
           ))}
-
+ 
+      
           <div className="border-t pt-5 text-sm space-y-3">
             <p className="font-semibold">Call us</p>
             <p className="text-[#1967d2] font-semibold">

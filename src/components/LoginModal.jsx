@@ -124,27 +124,14 @@ export default function LoginModal({ isOpen, onClose }) {
           {/* SIGNUP */}
           <p className="mt-4 text-sm text-center text-gray-600">
             Don't have an account?{" "}
-            <a href="#" className="text-[#1967d2] font-medium">
+            <a href="/register" className="text-[#1967d2] font-medium">
               Signup
             </a>
           </p>
 
-          {/* OR */}
-          <div className="my-6 flex items-center gap-3">
-            <div className="flex-1 h-px bg-gray-200" />
-            <span className="text-sm text-gray-500">or</span>
-            <div className="flex-1 h-px bg-gray-200" />
-          </div>
+         
 
-          {/* SOCIAL LOGIN */}
-          <div className="space-y-3">
-            <button className="w-full py-3 border rounded-lg hover:bg-gray-50 transition">
-              Log In via Facebook
-            </button>
-            <button className="w-full py-3 border rounded-lg hover:bg-gray-50 transition">
-              Log In via Gmail
-            </button>
-          </div>
+          
         </div>
       </div>
     </div>
